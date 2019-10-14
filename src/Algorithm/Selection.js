@@ -16,12 +16,15 @@ class Selection extends React.Component{
 		this.draw();
 	}
 	componentWillReceiveProps(nextProps) {
-		this.setState({ data: nextProps.data,}); 
-		this.draw();
+		this.setState({ data: nextProps.data,}, () =>{
+		this.doSort()
+		}); 
 	}
 	doSort(){
 		let i, j;
 		let sortdata = this.state.data;
+		console.log("sortdata");
+		console.log(sortdata);
 		for( i = 0 ; i < sortdata.length -1 ; i ++ ){
 			let arrMin = i;
 			for(j = i+1 ; j < sortdata.length ; j ++ ){
@@ -30,22 +33,18 @@ class Selection extends React.Component{
 				}
 			}
 			if(arrMin != i){
-				Swap(sortdata, i, j);
+				Swap(sortdata, i, arrMin);
 				this.setState({
 					data: sortdata,
 				});
 			}
 		}
+
 	}
 	draw(){
-		console.log("draw function");
-		console.log(this.state.data);
-		console.log(this.state.data[0]);
-		console.log(this.state.data[1]);
 		return (<DrawBar data = {this.state.data}/>);
 	}
 	render(){
-		//{this.doSort()};
 		return (
 			<>{this.draw()}</>
 		);

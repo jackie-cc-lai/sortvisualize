@@ -31,8 +31,6 @@ class App extends React.Component { //Currently statically written divs but will
 		});
 	}
 	SortSelect(){
-		console.log("SortSelect in app.js");
-		console.log(this.state.data);
 		return <Selection data={this.state.data}/>;
 	}
 	render(){
