@@ -28,10 +28,11 @@
 	border-color: #00f;
 	display: inline-block;
 	width: 30%;
-	height: 40vh;
+	height: 45vh;
 	color: #00ffff;
 	font-size: 12px;
 	position:relative;
+	margin:1px;
 	
 }
 .sortContainer{
@@ -65,7 +66,11 @@
 .sortMain{
 	padding-left: 30px;
 	padding-right: 30px;
-	height: 80%;
 	position: absolute;
 	bottom: 0px;
+}
+
+.sortFirst{
+	border-color: #afa;
+	
 }
