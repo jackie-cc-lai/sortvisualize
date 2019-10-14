@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DrawBar from './DrawBar';
+import Swap from './Swap';
 /*
 class Selection extends React.Component{
 	constructor(props){
@@ -21,15 +22,6 @@ class Selection extends React.Component{
 				
 			}
 		}
-	}
-	swap( num1,  num2){
-		let local = this.state.data;
-		let numTemp = local[num1];
-		local[num1] = local[num2];
-		local[num2] = numTemp;
-		this.setState({
-			data: local,
-		});
 	}
 
 }*/
