@@ -9,6 +9,10 @@ class Insertion extends React.Component{
 			data: JSON.parse(JSON.stringify(this.props.data)),
 			sortType: this.props.sort,
 		}
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick = () => {
+		this.doSort();
 	}
 	componentDidMount(){
 		this.draw();
@@ -19,6 +23,25 @@ class Insertion extends React.Component{
 		}); 
 	}
 	doSort(){
+		let i, j;
+		let sortdata = this.state.data;
+		for ( i = 0 ; i < sortdata.length ; i ++ ){
+			let temp = sortdata[i];
+			j = i;
+			while ( j > 0 && temp < sortdata[j - 1]){
+				sortdata[j] = sortdata[j-1];
+				j--;
+				this.setState({
+					data:sortdata,
+				});
+				
+			}
+			sortdata[j] = temp;
+			this.setState({
+				data:sortdata,
+			});
+		}
+		
 	}
 	draw(){
 		return (<DrawBar data = {this.state.data}/>);

@@ -19,7 +19,6 @@ class Bubble extends React.Component{
 		}); 
 	}
 	doSort(){
-		console.log("checking");
 		let i, j;
 		let done;
 		let sortdata = this.state.data;

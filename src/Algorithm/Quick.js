@@ -19,6 +19,7 @@ class Quick extends React.Component{
 		}); 
 	}
 	doSort(){
+		
 	}
 	draw(){
 		return (<DrawBar data = {this.state.data}/>);
