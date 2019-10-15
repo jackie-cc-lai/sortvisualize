@@ -6,11 +6,12 @@ import Merge from "./Algorithm/Merge";
 import Selection from "./Algorithm/Selection";
 import Bubble from "./Algorithm/Bubble";
 import Quick from "./Algorithm/Quick";
+import Heap from "./Algorithm/Heap";
 
 const makeRandomArray = (ArrSize) =>{
 	var arr = [];
 	for(let i = 0 ; i < ArrSize ; i ++){
-		arr.push(Math.floor(Math.random()*350));
+		arr.push(Math.ceil(Math.random()*350));
 	}
 	return arr;
 }
@@ -24,14 +25,25 @@ class App extends React.Component { //Currently statically written divs but will
 		this.MakeArray();
 	}
 	
-	MakeArray(ArrSize = 20){
+	MakeArray(ArrSize = 40){
 		var toSort = makeRandomArray(ArrSize);
 		this.setState({
 			data: toSort,
 		});
 	}
-	SortSelect(){
-		return <Selection data={this.state.data}/>;
+	SortSelect(sortType){
+		if(sortType === "Bubble"){
+			return <div className="sort" id = {sortType}>Bubble Sort<div className="sortMain"><Bubble data={this.state.data} sort={sortType}/> </div></div>;
+		}else if (sortType === "Insertion"){
+			return <div className="sort" id = {sortType}>Insertion Sort<div className="sortMain"><Insertion data={this.state.data} sort={sortType}/> </div></div>;
+		}else if (sortType ==="Quick"){
+			return <div className="sort" id = {sortType}>Quick Sort<div className="sortMain"><Quick data={this.state.data} sort={sortType}/> </div></div>;
+		}else if (sortType ==="Heap"){
+			return <div className="sort" id = {sortType}>Heap Sort<div className="sortMain"><Heap data={this.state.data} sort={sortType}/> </div></div>;
+		}else if (sortType ==="Merge"){
+			return <div className="sort" id = {sortType}>Merge Sort<div className="sortMain"><Merge data={this.state.data} sort={sortType}/> </div></div>;
+		}
+		return <div className="sort" id = {sortType}>Selection Sort<div className="sortMain"> <Selection data={this.state.data} sort={sortType}/> </div></div>;
 	}
 	render(){
 		return (
@@ -40,17 +52,12 @@ class App extends React.Component { //Currently statically written divs but will
 	  </header>
 	  <div className = "main">
 		  <div className = "sortContainer">
-			<div className = "sort" id = "merge">Merge Sort
-
-			</div>
-			<div className = "sort sortFirst" id = "select">Selection Sort
-				<div className = "sortMain">
-					{this.SortSelect()}
-				</div></div>
-			<div className = "sort" id = "insert">Insertion Sort</div>
-			<div className = "sort" id = "bubble">Bubble Sort</div>
-			<div className = "sort" id = "heap">Heap Sort</div>
-			<div className = "sort" id = "quick">Quick Sort</div>
+			{this.SortSelect("Merge")}
+			{this.SortSelect("Selection")}				
+			{this.SortSelect("Insertion")}				
+			{this.SortSelect("Bubble")}				
+			{this.SortSelect("Heap")}				
+			{this.SortSelect("Quick")}
 		  </div>
 	  </div>
     </div>

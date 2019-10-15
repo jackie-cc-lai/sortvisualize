@@ -2,7 +2,7 @@ import React from 'react';
 import Swap from './Swap';
 import DrawBar from './DrawBar';
 
-class Merge extends React.Component{
+class Heap extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -29,11 +29,12 @@ class Merge extends React.Component{
 				width: 7,
 				height:info,
 			}
-			return <div className="bar" style={style} key={i}></div>
+			let id = "heap" + `${i}`;
+			return <div className="bar" style={style} key={i} id={id}></div>
 		});
 		return bars;
 	}
 
 }
 
-export default Merge;
+export default Heap;
