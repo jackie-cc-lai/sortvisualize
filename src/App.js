@@ -25,11 +25,14 @@ class App extends React.Component { //Currently statically written divs but will
 		this.MakeArray();
 	}
 	
-	MakeArray(ArrSize = 40){
+	MakeArray(ArrSize = 60){
 		var toSort = makeRandomArray(ArrSize);
 		this.setState({
 			data: toSort,
 		});
+	}
+	StartSort(){
+		console.log("Begin sorting and animation");
 	}
 	SortSelect(sortType){
 		if(sortType === "Bubble"){
@@ -49,6 +52,8 @@ class App extends React.Component { //Currently statically written divs but will
 		return (
     <div className="App">
       <header className="App-header">
+	  <button className="btnTop" onClick={() => this.MakeArray()}> Generate New Array </button>
+	  <button className="btnTop" onClick={() => this.StartStort()}> Begin Sort! </button>
 	  </header>
 	  <div className = "main">
 		  <div className = "sortContainer">

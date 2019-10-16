@@ -49,7 +49,7 @@ class Insertion extends React.Component{
 	render(){
 		let bars = this.state.data.map(function(info, i){
 			let style = {
-				width: 7,
+				width: 4,
 				height:info,
 			}
 			let id = "insert" + `${i}`;

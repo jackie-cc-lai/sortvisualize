@@ -50,7 +50,7 @@ class Merge extends React.Component{
 	render(){
 		let bars = this.state.data.map(function(info, i){
 			let style = {
-				width: 7,
+				width: 4,
 				height:info,
 			}
 			return <div className="bar" style={style} key={i}></div>
