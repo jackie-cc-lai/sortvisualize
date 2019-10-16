@@ -19,34 +19,42 @@ class DrawDiv extends React.Component{
 		this.doSort()
 		}); 
 	}
-	doSort(){
-		let i, j,k = 0;
+	doSort(sortName){
 		let sortdata = this.state.data;
-		for( i = 0 ; i < sortdata.length -1 ; i ++ ){
-			let arrMin = i;
-			for(j = i+1 ; j < sortdata.length ; j ++ ){
-				if(sortdata[j] < sortdata[arrMin]){
-					arrMin = j;
-				}
-			}
-			if(arrMin != i){
-				Swap(sortdata, i, arrMin);
-				this.setState({
-					data: sortdata,
-				});
-				k++
-				
-			}
+		switch(this.state.sortType){
+			case "merge":
+				sortdata = mergeSort(sortdata);
+				break;
+			case "selection":
+				sortdata = selectionSort(sortdata);
+				break;
+			case "quick":
+				sortdata = quickSort(sortdata);
+				break;
+			case "heap":
+				sortdata = heapSort(sortdata);
+				break;
+			case "insertion":
+				sortdata = insertionSort(sortdata);
+				break;
+			case "bubble":
+				sortdata = bubbleSort(sortdata);
+				break;
 		}
-
 	}
 	draw(){
 		return (<DrawBar data = {this.state.data}/>);
 	}
 	render(){
-		return (
-			<>{this.draw()}</>
-		);
+		let bars = this.state.data.map(function(info, i){
+			let style = {
+				width: 4,
+				height:info,
+			}
+			let id = "select" + `${i}`;
+			return <div className="bar" style={style} key={i} id={id}></div>
+		});
+		return bars;
 	}
 
 }
