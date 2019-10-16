@@ -29,8 +29,7 @@ class Heap extends React.Component{
 				width: 4,
 				height:info,
 			}
-			let id = "heap" + `${i}`;
-			return <div className="bar" style={style} key={i} id={id}></div>
+			return <div className="bar" style={style} key={i}></div>
 		});
 		return bars;
 	}

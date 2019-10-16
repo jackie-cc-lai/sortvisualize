@@ -30,8 +30,7 @@ class Quick extends React.Component{
 				width: 4,
 				height:info,
 			}
-			let id = "quick" + `${i}`;
-		return <div className="bar" style={style} key={i} id={id}></div>
+		return <div className="bar" style={style} key={i}></div>
 		});
 		return bars;
 	}
