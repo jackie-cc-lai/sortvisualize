@@ -7,6 +7,8 @@ import {getInsertAnimations} from './Insertion';
 
 const ANIMATION_SPEED_MS = 20;
 const defaultColor = '#888';
+const workColor = '#f00';
+const doneColor = '#5f5';
 class DrawDiv extends React.Component{
 	constructor(props){
 		super(props);
@@ -52,14 +54,10 @@ class DrawDiv extends React.Component{
 		let sortdata = this.state.data;
 		let finishedIndex = 0;
 		const aniList = getSelectAnimations(sortdata);
-		console.log(aniList);
 		for(let i = 0 ; i < aniList.length ; i++){
 			const array = document.getElementsByClassName('barSelect');
 			const [aniType, first, second] = aniList[i];
 			if(aniType > 0){
-				if(aniType === 1 || aniType === 2){
-					console.log(aniList[i]);
-				}
 				const barStyle = array[second].style;
 				const color = aniType% 2 === 0 ? defaultColor: '#f00';
 				setTimeout(() => {
@@ -71,7 +69,7 @@ class DrawDiv extends React.Component{
 					const barStyle = array[first].style;
 					barStyle.height = `${second}px`;
 					if(aniType === -1){
-						barStyle.backgroundColor ='#5f5'; //because that one's completed
+						barStyle.backgroundColor =doneColor; //because that one's completed
 					}
 				}, i*ANIMATION_SPEED_MS);
 			}
@@ -89,9 +87,40 @@ class DrawDiv extends React.Component{
 	}
 	drawInsert(){
 		const aniList = getInsertAnimations(this.state.data);
-		this.setState({
-			data:aniList,
-		});
+		let i;
+		for(i = 0 ; i < aniList.length ; i ++ ) {
+			const array = document.getElementsByClassName('barInsert');
+			const [aniType,first,second] = aniList[i];
+			
+			if(aniType > 0 ){
+				const barOneStyle = array[first].style;
+				const barTwoStyle = array[second].style;
+				const color = aniType % 2 === 0 ? defaultColor: '#f00';
+				setTimeout(() => {
+					barOneStyle.backgroundColor = color;
+					barTwoStyle.backgroundColor = color;
+				}, i*ANIMATION_SPEED_MS);
+			}else{
+				const barStyle = array[first].style;
+				setTimeout(() => {
+					barStyle.height = `${second}px`;
+				}, i*ANIMATION_SPEED_MS);
+			}
+		}
+		const array = document.getElementsByClassName('barInsert');
+		while ( i >= aniList.length){
+			let j;
+			for(j = 0 ; j < array.length ; j ++ ){
+			const barStyle = array[j].style;
+			setTimeout(() => {
+				barStyle.backgroundColor = doneColor;
+			},i*ANIMATION_SPEED_MS);
+			}
+			if(j >=array.length){
+				break;
+			}
+		}
+		
 	}
 	drawQuick(){
 	}
