@@ -1,5 +1,4 @@
 import React from 'react';
-import Swap from './Swap';
 
 class Merge extends React.Component{
 	constructor(props){
@@ -11,7 +10,7 @@ class Merge extends React.Component{
 	}
 	componentDidMount(){
 	}
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.setState({ data: JSON.parse(JSON.stringify(nextProps.data)), sortType: nextProps.sort}, () =>{
 			let sortdata = this.state.data;
 			sortdata = this.doSort(sortdata);

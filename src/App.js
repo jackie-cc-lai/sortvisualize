@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 import Merge from "./Algorithm/Merge";
-import Quick from "./Algorithm/Quick";
-import Heap from "./Algorithm/Heap";
 import SortSelect from "./Algorithm/SortSelect";
 
 const makeRandomArray = (ArrSize) =>{
@@ -20,6 +18,7 @@ class App extends React.Component { //Currently statically written divs but will
 		this.state = {
 			data: [],
 			start: false,
+			anireset: null,
 		};
 	}
 	
@@ -34,31 +33,47 @@ class App extends React.Component { //Currently statically written divs but will
 			start: false,
 		});
 	}
+	MakeOptimal(ArrSize = 60){
+		const toSort = [];
+		let i;
+		for(i = 1 ; i < ArrSize+1 ; i ++ ){
+			toSort.push(i*4);
+		}
+		this.setState({
+			data: toSort,
+			start:false,
+			anireset: true,
+		});
+	}
+	MakeWorst(ArrSize = 60){
+		const toSort = [];
+		let i;
+		for( i = ArrSize + 1 ; i > 0 ; i -- ){
+			toSort.push(i*4);
+		}
+		this.setState({
+			data: toSort,
+			start:false,
+		});
+	}
 	StartSort(){
 		this.setState({
 			start: true,
 		});
-		console.log("Begin sorting and animation");
 	}
 	SortSelect(sortType){
-		if(sortType === "Bubble"){
-			return <div className="sort" id = {sortType}>Bubble Sort<div className="sortMain"><SortSelect data={this.state.data} sort={sortType} start={this.state.start}/> </div></div>;
-		}else if (sortType === "Insertion"){
-			return <div className="sort" id = {sortType}>Insertion Sort<div className="sortMain"><SortSelect data={this.state.data} sort={sortType} start={this.state.start}/> </div></div>;
-		}else if (sortType ==="Quick"){
-			return <div className="sort" id = {sortType}>Quick Sort<div className="sortMain"><Quick data={this.state.data} sort={sortType}/> </div></div>;
-		}else if (sortType ==="Heap"){
-			return <div className="sort" id = {sortType}>Heap Sort<div className="sortMain"><Heap data={this.state.data} sort={sortType}/> </div></div>;
-		}else if (sortType ==="Merge"){
+		if (sortType ==="Merge"){
 			return <div className="sort" id = {sortType}>Merge Sort<div className="sortMain"><Merge data={this.state.data} sort={sortType} start={this.state.start}/> </div></div>;
-		}
-		return <div className="sort" id = {sortType}>Selection Sort<div className="sortMain"> <SortSelect data={this.state.data} sort={sortType} start={this.state.start}/> </div></div>;
+		}else
+	return <div className="sort" id = {sortType}>{sortType} Sort<div className="sortMain"> <SortSelect data={this.state.data} sort={sortType} start={this.state.start} anireset={this.state.anireset}/> </div></div>;
 	}
 	render(){
 		return (
     <div className="App">
       <header className="App-header">
 	  <button className="btnTop" onClick={() => this.MakeArray()}> Generate New Array </button>
+	  <button className="btnTop" onClick={() => this.MakeOptimal()}> Optimal Case Array </button>
+	  <button className="btnTop" onClick={() => this.MakeWorst()}> Worst Case Array </button>
 	  <button className="btnTop" onClick={() => this.StartSort()}> Begin Sort! </button>
 	  </header>
 	  <div className = "main">

@@ -1,5 +1,4 @@
 import React from 'react';
-import Swap from './Swap';
 import {getSelectAnimations} from './Selection';
 import {getBubbleAnimations} from './Bubble';
 import {getInsertAnimations} from './Insertion';
@@ -16,19 +15,28 @@ class DrawDiv extends React.Component{
 			data: JSON.parse(JSON.stringify(this.props.data)),
 			sortType: this.props.sort,
 			start: this.props.start,
+			anireset: null
 		}
 	}
 	componentDidMount(){
 	}
-	componentWillReceiveProps(nextProps) {
-		this.setState({ data: JSON.parse(JSON.stringify(nextProps.data)), sortType: nextProps.sort, start: nextProps.start}, () =>{
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		this.setState({ data: JSON.parse(JSON.stringify(nextProps.data)), sortType: nextProps.sort, start: nextProps.start, anireset: nextProps.anireset}, () =>{
 		if(this.state.start === true){
 			this.doSort(this.state.sortType);
 		}
+		if(this.state.anireset === true){
+			let i;
+			const array = document.getElementsByClassName('bar');
+			for ( i = 0 ; i < array.length ; i ++ ){
+				const barStyle = array[i].style;
+				barStyle.backgroundColor=defaultColor;
+			}
+		}
+		
 		}); 
 	}
 	doSort(sortName){
-		let sortdata;
 		switch(this.state.sortType){
 			case "Merge":
 				this.drawMerge();
@@ -48,18 +56,19 @@ class DrawDiv extends React.Component{
 			case "Bubble":
 				this.drawBubble();
 				break;
+			default:
+				break;
 		}
 	}
 	drawSelection(){
 		let sortdata = this.state.data;
-		let finishedIndex = 0;
 		const aniList = getSelectAnimations(sortdata);
 		for(let i = 0 ; i < aniList.length ; i++){
 			const array = document.getElementsByClassName('barSelect');
 			const [aniType, first, second] = aniList[i];
 			if(aniType > 0){
 				const barStyle = array[second].style;
-				const color = aniType% 2 === 0 ? defaultColor: '#f00';
+				const color = aniType% 2 === 0 ? defaultColor: workColor;
 				setTimeout(() => {
 					barStyle.backgroundColor = color;
 				}, i*ANIMATION_SPEED_MS);
@@ -78,10 +87,27 @@ class DrawDiv extends React.Component{
 	}
 	drawBubble(){
 		let sortdata = this.state.data;
-		sortdata = getBubbleAnimations(sortdata);
-		this.setState({
-			data:sortdata,
-		});
+		const aniList = getBubbleAnimations(sortdata);
+		let i;
+		for(i = 0 ; i < aniList.length ; i ++ ) {
+			const array = document.getElementsByClassName('barBubble');
+			const [aniType,first,second] = aniList[i];
+			
+			if(aniType > 0 ){
+				const barOneStyle = array[first].style;
+				const barTwoStyle = array[second].style;
+				const color = aniType % 2 === 0 ? defaultColor: workColor;
+				setTimeout(() => {
+					barOneStyle.backgroundColor = color;
+					barTwoStyle.backgroundColor = color;
+				}, i*ANIMATION_SPEED_MS);
+			}else{
+				const barStyle = array[first].style;
+				setTimeout(() => {
+					barStyle.height = `${second}px`;
+				}, i*ANIMATION_SPEED_MS);
+			}
+		}
 	}
 	drawHeap(){
 	}
@@ -95,7 +121,7 @@ class DrawDiv extends React.Component{
 			if(aniType > 0 ){
 				const barOneStyle = array[first].style;
 				const barTwoStyle = array[second].style;
-				const color = aniType % 2 === 0 ? defaultColor: '#f00';
+				const color = aniType % 2 === 0 ? defaultColor: workColor;
 				setTimeout(() => {
 					barOneStyle.backgroundColor = color;
 					barTwoStyle.backgroundColor = color;
@@ -117,7 +143,7 @@ class DrawDiv extends React.Component{
 			},i*ANIMATION_SPEED_MS);
 			}
 			if(j >=array.length){
-				break;
+				break; //there should be a more elegant way of doing this...
 			}
 		}
 		
@@ -134,7 +160,6 @@ class DrawDiv extends React.Component{
 				width: 4,
 				height:info,
 			}
-			console.log(sortType);
 			if(sortType === 'Selection'){
 				return <div className="bar barSelect" style={style} key={i}></div>
 			}else if (sortType ==='Merge'){

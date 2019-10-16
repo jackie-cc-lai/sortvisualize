@@ -17,7 +17,7 @@ export function getSelectAnimations(sortdata){
 			
 		}
 		
-		if(arrMin != i){
+		if(arrMin !== i){
 			Swap(sortdata, i, arrMin);
 			
 		}
