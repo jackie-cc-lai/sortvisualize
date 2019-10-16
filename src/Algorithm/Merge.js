@@ -1,6 +1,5 @@
 import React from 'react';
 import Swap from './Swap';
-import DrawBar from './DrawBar';
 
 class Merge extends React.Component{
 	constructor(props){
@@ -11,7 +10,6 @@ class Merge extends React.Component{
 		}
 	}
 	componentDidMount(){
-		this.draw();
 	}
 	componentWillReceiveProps(nextProps) {
 		this.setState({ data: JSON.parse(JSON.stringify(nextProps.data)), sortType: nextProps.sort}, () =>{
@@ -43,9 +41,6 @@ class Merge extends React.Component{
 			}
 		}
 		return resultArray.concat(arrLeft.slice(leftIndex)).concat(arrRight.slice(rightIndex));
-	}
-	draw(){
-		return (<DrawBar data = {this.state.data}/>);
 	}
 	render(){
 		let bars = this.state.data.map(function(info, i){

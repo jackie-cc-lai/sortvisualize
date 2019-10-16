@@ -1,6 +1,5 @@
 import React from 'react';
 import Swap from './Swap';
-import DrawBar from './DrawBar';
 
 class Heap extends React.Component{
 	constructor(props){
@@ -11,7 +10,6 @@ class Heap extends React.Component{
 		}
 	}
 	componentDidMount(){
-		this.draw();
 	}
 	componentWillReceiveProps(nextProps) {
 		this.setState({ data: JSON.parse(JSON.stringify(nextProps.data)), sortType: nextProps.sort}, () =>{
@@ -19,9 +17,6 @@ class Heap extends React.Component{
 		}); 
 	}
 	doSort(){
-	}
-	draw(){
-		return (<DrawBar data = {this.state.data}/>);
 	}
 	render(){
 		let bars = this.state.data.map(function(info, i){
