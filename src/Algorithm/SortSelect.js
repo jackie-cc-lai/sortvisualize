@@ -157,7 +157,6 @@ class DrawDiv extends React.Component{
 		let sortType = this.state.sortType;
 		let bars = this.state.data.map(function(info, i){
 			let style = {
-				width: 4,
 				height:info,
 			}
 			if(sortType === 'Selection'){
