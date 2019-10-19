@@ -16,7 +16,6 @@ const partition = (data, low, high, animations) => {
 	let pivot = data[high];
 	animations.push([3,0,high]);
 	let i = low - 1;
-	console.log(i);
 	for ( let j = low ; j <=high - 1 ; j ++){
 		animations.push([1,0,j]);
 		if(data[j] < pivot){

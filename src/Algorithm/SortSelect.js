@@ -3,12 +3,28 @@ import {getSelectAnimations} from './Selection';
 import {getBubbleAnimations} from './Bubble';
 import {getInsertAnimations} from './Insertion';
 import {getQuickAnimations} from './Quick';
-//import {getMergeAnimations} from './Merge';
+import {getMergeAnimations} from './Merge';
 
 const ANIMATION_SPEED_MS = 40;
 const defaultColor = '#888';
 const workColor = '#f00';
 const doneColor = '#5f5';
+
+const makeGreen = (sortClass, aniList, i) =>{
+	const array = document.getElementsByClassName(sortClass);
+	while ( i >= aniList.length){
+		let j;
+		for(j = 0 ; j < array.length ; j ++ ){
+			const barStyle = array[j].style;
+			setTimeout(() => {
+				barStyle.backgroundColor = doneColor;
+			},i*ANIMATION_SPEED_MS);
+		}
+		if(j >=array.length){
+			break; //there should be a more elegant way of doing this...
+		}
+	}
+}
 class DrawDiv extends React.Component{
 	constructor(props){
 		super(props);
@@ -19,8 +35,7 @@ class DrawDiv extends React.Component{
 			anireset: null
 		}
 	}
-	componentDidMount(){
-	}
+	
 	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.setState({ data: JSON.parse(JSON.stringify(nextProps.data)), sortType: nextProps.sort, start: nextProps.start, anireset: nextProps.anireset}, () =>{
 		if(this.state.start === true){
@@ -106,9 +121,13 @@ class DrawDiv extends React.Component{
 				const barStyle = array[first].style;
 				setTimeout(() => {
 					barStyle.height = `${second}px`;
+					if(aniType === -1){
+						barStyle.backgroundColor = doneColor;
+					}
 				}, i*ANIMATION_SPEED_MS);
 			}
 		}
+		makeGreen('barBubble', aniList, i);
 	}
 	drawHeap(){
 	}
@@ -134,24 +153,13 @@ class DrawDiv extends React.Component{
 				}, i*ANIMATION_SPEED_MS);
 			}
 		}
-		const array = document.getElementsByClassName('barInsert');
-		while ( i >= aniList.length){
-			let j;
-			for(j = 0 ; j < array.length ; j ++ ){
-			const barStyle = array[j].style;
-			setTimeout(() => {
-				barStyle.backgroundColor = doneColor;
-			},i*ANIMATION_SPEED_MS);
-			}
-			if(j >=array.length){
-				break; //there should be a more elegant way of doing this...
-			}
-		}
+		makeGreen('barInsert', aniList, i);
 		
 	}
 	drawQuick(){
 		const aniList = getQuickAnimations(this.state.data);
-		for(let i = 0 ; i < aniList.length ; i++){
+		let i;
+		for(i = 0 ; i < aniList.length ; i++){
 			const array = document.getElementsByClassName('barQuick');
 			const [aniType, first, second] = aniList[i];
 			if(aniType > 0){
@@ -171,9 +179,14 @@ class DrawDiv extends React.Component{
 			}
 
 		}
+		makeGreen('barQuick', aniList, i);
 	}
 	
 	drawMerge() {
+		const sortdata = getMergeAnimations(this.state.data);
+		this.setState({
+			data: sortdata,
+		});
 	}
 	render(){
 		let sortType = this.state.sortType;

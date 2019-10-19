@@ -1,4 +1,3 @@
-
 import Swap from './Swap';
 
 export function getBubbleAnimations(sortdata){
@@ -18,6 +17,7 @@ export function getBubbleAnimations(sortdata){
 			}
 			animations.push([2,i,i+1]);
 		}
+		animations.push([-1,length,sortdata[length]]);
 		length--;
 	}while(done);
 	return animations;

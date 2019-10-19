@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Merge from "./Algorithm/Merge";
 import SortSelect from "./Algorithm/SortSelect";
 
 const makeRandomArray = (ArrSize) =>{
@@ -62,10 +61,7 @@ class App extends React.Component { //Currently statically written divs but will
 		});
 	}
 	SortSelect(sortType){
-		if (sortType ==="Merge"){
-			return <div className="sort" id = {sortType}>Merge Sort<div className="sortMain"><Merge data={this.state.data} sort={sortType} start={this.state.start}/> </div></div>;
-		}else
-	return <div className="sort" id = {sortType}>{sortType} Sort<div className="sortMain"> <SortSelect data={this.state.data} sort={sortType} start={this.state.start} anireset={this.state.anireset}/> </div></div>;
+		return <div className="sort" id = {sortType}>{sortType} Sort<div className="sortMain"> <SortSelect data={this.state.data} sort={sortType} start={this.state.start} anireset={this.state.anireset}/> </div></div>;
 	}
 	render(){
 		return (
