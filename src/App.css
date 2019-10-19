@@ -60,16 +60,13 @@
 		width: 45%;
 	}
 }
-@media only screen and (max-width:1830px){
-	.sort{
-		display:inline-block;
-		width: 50%;
-	}
-}
 @media only screen and (max-width:1120px){
 	.sort{
 		display:inline-block;
 		width: 80%;
+	}
+	.main{
+		height:100%;
 	}
 }
 
@@ -77,6 +74,10 @@
 	.sort{
 		display:inline-block;
 		width: 90%;
+		height: 60%;
+	}
+	.main{
+		height:100%;
 	}
 }
 .sortContainer{
