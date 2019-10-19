@@ -2,21 +2,19 @@
 
 ## Note: For desktop use
 
-The sorts are just about completed, but the actual animation is not completed - Redux is installed but not yet operable
-
 A sorting visualizer using pure React to showcase the following sorts:
 
-Bubble
+Bubble (Operable)
 
-Insertion
+Insertion (Operable)
 
-Merge
+Merge (sorting algorithm in place, animation not in place)
 
-Heap
+Heap (Inoperable as of 10/19/2019)
 
-Quick
+Quick (Operable)
 
-Selection
+Selection (Operable)
 
 To start the app, within the directory, type
 
