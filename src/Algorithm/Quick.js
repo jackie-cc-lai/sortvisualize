@@ -1,35 +1,35 @@
-import React from 'react';
 import Swap from './Swap';
 
-class Quick extends React.Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			data: JSON.parse(JSON.stringify(this.props.data)),
-			sortType: this.props.sort,
-		}
-	}
-	componentDidMount(){
-	}
-	componentWillReceiveProps(nextProps) {
-		this.setState({ data: JSON.parse(JSON.stringify(nextProps.data)), sortType: nextProps.sort}, () =>{
-		this.doSort()
-		}); 
-	}
-	doSort(){
-		
-	}
-	render(){
-		let bars = this.state.data.map(function(info, i){
-			let style = {
-				width: 4,
-				height:info,
-			}
-		return <div className="bar" style={style} key={i}></div>
-		});
-		return bars;
-	}
-
+export function getQuickAnimations(data){
+	const animations = [];
+	doQuick(data, 0, data.length - 1, animations);
+	return animations;
 }
-
-export default Quick;
+function doQuick(data, low, high, animations){
+	if(low < high){
+		let newIndex = partition(data, low, high, animations);
+		doQuick(data, low, newIndex - 1, animations);
+		doQuick(data, newIndex + 1, high, animations);
+	}
+}
+const partition = (data, low, high, animations) => {
+	let pivot = data[high];
+	animations.push([3,0,high]);
+	let i = low - 1;
+	console.log(i);
+	for ( let j = low ; j <=high - 1 ; j ++){
+		animations.push([1,0,j]);
+		if(data[j] < pivot){
+			i++;
+			Swap(data, i, j);
+			animations.push([-2,i,data[i]]);
+			animations.push([-2,j,data[j]]);
+		}
+		animations.push([2,0,j]);
+	}
+	Swap(data, i+1, high);
+	animations.push([-2,i+1, data[i+1]]);
+	animations.push([-2,high,data[high]]);
+	animations.push([2,0,high]);
+	return (i+1);
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import {getSelectAnimations} from './Selection';
 import {getBubbleAnimations} from './Bubble';
 import {getInsertAnimations} from './Insertion';
+import {getQuickAnimations} from './Quick';
 //import {getMergeAnimations} from './Merge';
 
 const ANIMATION_SPEED_MS = 20;
@@ -149,6 +150,27 @@ class DrawDiv extends React.Component{
 		
 	}
 	drawQuick(){
+		const aniList = getQuickAnimations(this.state.data);
+		for(let i = 0 ; i < aniList.length ; i++){
+			const array = document.getElementsByClassName('barQuick');
+			const [aniType, first, second] = aniList[i];
+			if(aniType > 0){
+				const barStyle = array[second].style;
+				const color = aniType% 3 === 0 ? 'blue': aniType% 3 === 2 ? defaultColor: workColor;
+				setTimeout(() => {
+					barStyle.backgroundColor = color;
+				}, i*ANIMATION_SPEED_MS);
+			}else{
+				setTimeout(() =>{
+					const barStyle = array[first].style;
+					barStyle.height = `${second}px`;
+					if(aniType === -1){
+						barStyle.backgroundColor =doneColor; //because that one's completed
+					}
+				}, i*ANIMATION_SPEED_MS);
+			}
+
+		}
 	}
 	
 	drawMerge() {

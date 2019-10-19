@@ -26,14 +26,14 @@ class App extends React.Component { //Currently statically written divs but will
 		this.MakeArray();
 	}
 	
-	MakeArray(ArrSize = 30){
+	MakeArray(ArrSize = 80){
 		var toSort = makeRandomArray(ArrSize);
 		this.setState({
 			data: toSort,
 			start: false,
 		});
 	}
-	MakeOptimal(ArrSize = 30){
+	MakeOptimal(ArrSize = 80){
 		const toSort = [];
 		let i;
 		for(i = 1 ; i < ArrSize+1 ; i ++ ){
@@ -45,7 +45,7 @@ class App extends React.Component { //Currently statically written divs but will
 			anireset: true,
 		});
 	}
-	MakeWorst(ArrSize = 30){
+	MakeWorst(ArrSize = 80){
 		const toSort = [];
 		let i;
 		for( i = ArrSize + 1 ; i > 0 ; i -- ){
