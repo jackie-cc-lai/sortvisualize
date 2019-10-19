@@ -5,7 +5,7 @@ import {getInsertAnimations} from './Insertion';
 import {getQuickAnimations} from './Quick';
 //import {getMergeAnimations} from './Merge';
 
-const ANIMATION_SPEED_MS = 20;
+const ANIMATION_SPEED_MS = 40;
 const defaultColor = '#888';
 const workColor = '#f00';
 const doneColor = '#5f5';

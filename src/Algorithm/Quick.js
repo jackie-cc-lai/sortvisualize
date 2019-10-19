@@ -21,11 +21,14 @@ const partition = (data, low, high, animations) => {
 		animations.push([1,0,j]);
 		if(data[j] < pivot){
 			i++;
+			animations.push([1,0,i]);
 			Swap(data, i, j);
 			animations.push([-2,i,data[i]]);
 			animations.push([-2,j,data[j]]);
+			animations.push([2,0,i]);
 		}
 		animations.push([2,0,j]);
+
 	}
 	Swap(data, i+1, high);
 	animations.push([-2,i+1, data[i+1]]);
