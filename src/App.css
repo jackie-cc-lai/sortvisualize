@@ -104,7 +104,7 @@ html, body{
 		padding-right:0px;
 	}
 	.bar{
-		width: 2px;
+		width: 2px !important
 	}
 }
 .sortContainer{

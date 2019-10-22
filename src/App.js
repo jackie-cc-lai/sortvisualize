@@ -30,6 +30,7 @@ class App extends React.Component { //Currently statically written divs but will
 		this.setState({
 			data: toSort,
 			start: false,
+			anireset: true,
 		});
 	}
 	MakeOptimal(ArrSize = 50){
@@ -53,6 +54,7 @@ class App extends React.Component { //Currently statically written divs but will
 		this.setState({
 			data: toSort,
 			start:false,
+			anireset:true,
 		});
 	}
 	StartSort(){
