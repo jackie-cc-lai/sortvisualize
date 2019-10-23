@@ -4,6 +4,7 @@ import {getBubbleAnimations} from './Bubble';
 import {getInsertAnimations} from './Insertion';
 import {getQuickAnimations} from './Quick';
 import {getMergeAnimations} from './Merge';
+import {getHeapAnimations} from './Heap';
 
 const ANIMATION_SPEED_MS = 40;
 const defaultColor = '#888';
@@ -130,6 +131,30 @@ class DrawDiv extends React.Component{
 		makeGreen('barBubble', aniList, i);
 	}
 	drawHeap(){
+		const aniList = getHeapAnimations(this.state.data);
+		let i;
+		for(i = 0 ; i < aniList.length ; i++){
+			const array = document.getElementsByClassName('barHeap');
+			const [aniType, first, second] = aniList[i];
+			if(aniType > 0){
+				console.log(i);
+				const barStyle = array[second].style;
+				const color = aniType% 3 === 0 ? 'blue': aniType% 3 === 2 ? defaultColor: workColor;
+				setTimeout(() => {
+					barStyle.backgroundColor = color;
+				}, i*ANIMATION_SPEED_MS);
+			}else{
+				setTimeout(() =>{
+					const barStyle = array[first].style;
+					barStyle.height = `${second}px`;
+					if(aniType === -1){
+						barStyle.backgroundColor =doneColor; //because that one's completed
+					}
+				}, i*ANIMATION_SPEED_MS);
+			}
+
+		}
+		makeGreen('barHeap', aniList, i);
 	}
 	drawInsert(){
 		const aniList = getInsertAnimations(this.state.data);

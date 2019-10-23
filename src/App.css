@@ -91,7 +91,8 @@ html, body{
 		padding-right:0px;
 	}
 	.bar{
-		width: 2px !important
+		width: 2px !important;
+		margin-right: 0px;
 	}
 }
 @media only screen and (max-width:500px){
@@ -109,7 +110,8 @@ html, body{
 		padding-right:0px;
 	}
 	.bar{
-		width: 2px !important
+		width: 2px !important;
+		margin-right: 0px;
 	}
 }
 .sortContainer{
@@ -135,8 +137,8 @@ html, body{
 }
 
 .sortMain{
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
 	position: absolute;
 	bottom: 0px;
 }

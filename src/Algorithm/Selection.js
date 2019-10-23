@@ -32,7 +32,7 @@ export function getSelectAnimations(sortdata){
 
 /*
 Key:
--1: Correctly sorted
+-1: Correctly swapped
 -2: Height swapped
  1: j iteration color change to red
  2: j iteration color return to grey
