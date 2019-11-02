@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SortSelect from "./Algorithm/SortSelect";
-
+const a = 30;
 const makeRandomArray = (ArrSize) =>{
 	var arr = [];
 
@@ -25,7 +25,7 @@ class App extends React.Component { //Currently statically written divs but will
 		this.MakeArray();
 	}
 	
-	MakeArray(ArrSize = 40){
+	MakeArray(ArrSize = a){
 		var toSort = makeRandomArray(ArrSize);
 		this.setState({
 			data: toSort,
@@ -33,7 +33,7 @@ class App extends React.Component { //Currently statically written divs but will
 			anireset: true,
 		});
 	}
-	MakeOptimal(ArrSize = 40){
+	MakeOptimal(ArrSize = a){
 		const toSort = [];
 		let i;
 		for(i = 1 ; i < ArrSize+1 ; i ++ ){
@@ -45,7 +45,7 @@ class App extends React.Component { //Currently statically written divs but will
 			anireset: true,
 		});
 	}
-	MakeWorst(ArrSize = 40){
+	MakeWorst(ArrSize = a){
 		const toSort = [];
 		let i;
 		for( i = ArrSize + 1 ; i > 0 ; i -- ){

@@ -3,7 +3,6 @@ let n; //global length variable
 export function getHeapAnimations(data){
 	const animations = [];
 	Heap(data, animations);
-	console.log(animations);
 	return animations;
 }
 
@@ -39,7 +38,7 @@ function HeapMakeRoot(data, i, animations){
 		max = r;
 		animations.push([1,0,max]);
 	}
-	if(max != i){
+	if(max !== i){
 		Swap(data, i, max);
 		animations.push([-2, max, data[max]]);
 		animations.push([-2,i,data[i]]);

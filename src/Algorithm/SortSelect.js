@@ -137,7 +137,6 @@ class DrawDiv extends React.Component{
 			const array = document.getElementsByClassName('barHeap');
 			const [aniType, first, second] = aniList[i];
 			if(aniType > 0){
-				console.log(i);
 				const barStyle = array[second].style;
 				const color = aniType% 3 === 0 ? 'blue': aniType% 3 === 2 ? defaultColor: workColor;
 				setTimeout(() => {
@@ -208,10 +207,28 @@ class DrawDiv extends React.Component{
 	}
 	
 	drawMerge() {
-		const sortdata = getMergeAnimations(this.state.data);
-		this.setState({
-			data: sortdata,
-		});
+		const aniList = getMergeAnimations(this.state.data);
+		let i;
+		for(i = 0 ; i < aniList.length ; i ++ ) {
+			const array = document.getElementsByClassName('barMerge');
+			const [aniType,first,second] = aniList[i];
+			
+			if(aniType > 0 ){
+				const barOneStyle = array[first].style;
+				const barTwoStyle = array[second].style;
+				const color = aniType % 2 === 0 ? defaultColor: workColor;
+				setTimeout(() => {
+					barOneStyle.backgroundColor = color;
+					barTwoStyle.backgroundColor = color;
+				}, i*ANIMATION_SPEED_MS);
+			}else{
+				const barStyle = array[first].style;
+				setTimeout(() => {
+					barStyle.height = `${second}px`;
+				}, i*ANIMATION_SPEED_MS);
+			}
+		}
+		makeGreen('barMerge',aniList,i);
 	}
 	render(){
 		let sortType = this.state.sortType;
