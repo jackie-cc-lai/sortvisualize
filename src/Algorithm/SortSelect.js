@@ -6,7 +6,7 @@ import {getQuickAnimations} from './Quick';
 import {getMergeAnimations} from './Merge';
 import {getHeapAnimations} from './Heap';
 
-const ANIMATION_SPEED_MS = 40;
+const ANIMATION_SPEED_MS = 20;
 const defaultColor = '#888';
 const workColor = '#f00';
 const doneColor = '#5f5';

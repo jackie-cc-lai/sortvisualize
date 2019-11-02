@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SortSelect from "./Algorithm/SortSelect";
-const a = 30;
+const a = 68;
 const makeRandomArray = (ArrSize) =>{
 	var arr = [];
 
