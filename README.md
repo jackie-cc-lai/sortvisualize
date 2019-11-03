@@ -1,20 +1,18 @@
-## Warning: Incomplete
-
 ## Note: For desktop use
 
 A sorting visualizer using pure React to showcase the following sorts:
 
-Bubble (Operable)
+Bubble 
 
-Insertion (Operable)
+Insertion 
 
-Merge (sorting algorithm in place, animation not in place)
+Merge 
 
-Heap (Inoperable as of 10/19/2019)
+Heap 
 
-Quick (Operable)
+Quick
 
-Selection (Operable)
+Selection
 
 To start the app, within the directory, type
 

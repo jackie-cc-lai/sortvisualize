@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SortSelect from "./Algorithm/SortSelect";
-const a = 68;
+const a = 60;
 const makeRandomArray = (ArrSize) =>{
 	var arr = [];
 
@@ -69,7 +69,9 @@ class App extends React.Component { //Currently statically written divs but will
 		return (
     <div className="App">
       <header className="App-header">
-	  <button className="btnTop" onClick={() => this.MakeArray()}> Generate New Array </button>
+	  <button className="btnTop" onClick={() => this.MakeArray(15)}> Generate Small Array </button>
+	  <button className="btnTop" onClick={() => this.MakeArray(30)}> Generate Medium Array </button>
+	  <button className="btnTop" onClick={() => this.MakeArray(68)}> Generate Large Array </button>
 	  <button className="btnTop" onClick={() => this.MakeOptimal()}> Optimal Case Array </button>
 	  <button className="btnTop" onClick={() => this.MakeWorst()}> Worst Case Array </button>
 	  <button className="btnTop" onClick={() => this.StartSort()}> Begin Sort! </button>
