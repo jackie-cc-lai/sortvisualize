@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
 import SortSelect from "./Algorithm/SortSelect";
-const a = 60;
-const makeRandomArray = (ArrSize) =>{
-	var arr = [];
 
+const getMaxSize = (screenWidth = window.outerWidth) => {
+	return (screenWidth < 900) ? 40 : (screenWidth < 1100)? 80 : (screenWidth < 1200) ? 50 : 68;
+}
+
+const makeRandomArray = (ArrSize = getMaxSize() ) =>{
+	var arr = [];
+	console.log(ArrSize);
 	for(let i = 0 ; i < ArrSize ; i ++){
 		arr.push(Math.ceil(Math.random()*350));
 	}
@@ -25,7 +29,7 @@ class App extends React.Component { //Currently statically written divs but will
 		this.MakeArray();
 	}
 	
-	MakeArray(ArrSize = a){
+	MakeArray(ArrSize){
 		var toSort = makeRandomArray(ArrSize);
 		this.setState({
 			data: toSort,
@@ -33,7 +37,7 @@ class App extends React.Component { //Currently statically written divs but will
 			anireset: true,
 		});
 	}
-	MakeOptimal(ArrSize = a){
+	MakeOptimal(ArrSize = getMaxSize()){
 		const toSort = [];
 		let i;
 		for(i = 1 ; i < ArrSize+1 ; i ++ ){
@@ -45,7 +49,7 @@ class App extends React.Component { //Currently statically written divs but will
 			anireset: true,
 		});
 	}
-	MakeWorst(ArrSize = a){
+	MakeWorst(ArrSize = getMaxSize()){
 		const toSort = [];
 		let i;
 		for( i = ArrSize + 1 ; i > 0 ; i -- ){
@@ -66,12 +70,15 @@ class App extends React.Component { //Currently statically written divs but will
 		return <div className="sort" id = {sortType}>{sortType} Sort<div className="sortMain"> <SortSelect data={this.state.data} sort={sortType} start={this.state.start} anireset={this.state.anireset}/> </div></div>;
 	}
 	render(){
+		let maxSize = getMaxSize();
+		console.log("rendering maxSize is:");
+		console.log(maxSize);
 		return (
     <div className="App">
       <header className="App-header">
 	  <button className="btnTop" onClick={() => this.MakeArray(15)}> Generate Small Array </button>
 	  <button className="btnTop" onClick={() => this.MakeArray(30)}> Generate Medium Array </button>
-	  <button className="btnTop" onClick={() => this.MakeArray(68)}> Generate Large Array </button>
+	  <button className="btnTop" onClick={() => this.MakeArray()}> Generate Large Array </button>
 	  <button className="btnTop" onClick={() => this.MakeOptimal()}> Optimal Case Array </button>
 	  <button className="btnTop" onClick={() => this.MakeWorst()}> Worst Case Array </button>
 	  <button className="btnTop" onClick={() => this.StartSort()}> Begin Sort! </button>
